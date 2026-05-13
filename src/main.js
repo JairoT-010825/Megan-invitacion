@@ -228,7 +228,7 @@ function renderApp() {
       <button class="music-toggle" type="button" id="musicToggle" aria-label="Activar música de fondo" aria-pressed="false">
         ${icon.music}
       </button>
-      <div class="music-frame" id="musicFrame" aria-hidden="true"></div>
+      <audio id="backgroundMusic" src="${EVENT.backgroundMusic.src}" loop preload="none"></audio>
       <div class="toast" id="toast" role="status" aria-live="polite"></div>
     </div>
   `;
@@ -319,14 +319,13 @@ function initActions() {
 
 function toggleBackgroundMusic() {
   const button = document.querySelector('#musicToggle');
-  const frame = document.querySelector('#musicFrame');
-  const videoId = EVENT.backgroundMusic?.youtubeId;
-  if (!button || !frame || !videoId) return;
+  const audio = document.querySelector('#backgroundMusic');
+  if (!button || !audio) return;
 
-  const isPlaying = button.getAttribute('aria-pressed') === 'true';
+  const isPlaying = !audio.paused;
 
   if (isPlaying) {
-    frame.innerHTML = '';
+    audio.pause();
     button.classList.remove('is-playing');
     button.setAttribute('aria-pressed', 'false');
     button.setAttribute('aria-label', 'Activar música de fondo');
@@ -334,28 +333,17 @@ function toggleBackgroundMusic() {
     return;
   }
 
-  const params = new URLSearchParams({
-    autoplay: '1',
-    loop: '1',
-    playlist: videoId,
-    controls: '0',
-    modestbranding: '1',
-    rel: '0',
-    playsinline: '1'
-  });
-
-  frame.innerHTML = `
-    <iframe
-      title="Música de fondo: ${EVENT.backgroundMusic.title || 'canción 80s'}"
-      src="https://www.youtube.com/embed/${videoId}?${params.toString()}"
-      allow="autoplay; encrypted-media"
-      referrerpolicy="strict-origin-when-cross-origin"
-    ></iframe>
-  `;
-  button.classList.add('is-playing');
-  button.setAttribute('aria-pressed', 'true');
-  button.setAttribute('aria-label', 'Pausar música de fondo');
-  showToast('Música activada.');
+  audio.volume = 0.72;
+  audio.play()
+    .then(() => {
+      button.classList.add('is-playing');
+      button.setAttribute('aria-pressed', 'true');
+      button.setAttribute('aria-label', 'Pausar música de fondo');
+      showToast('Música activada.');
+    })
+    .catch(() => {
+      showToast('Toca otra vez para activar la música.');
+    });
 }
 
 function initRsvp() {

@@ -23,7 +23,7 @@ export const EVENT = {
     table: import.meta.env.VITE_SUPABASE_TABLE || 'rsvps'
   },
   backgroundMusic: {
-    youtubeId: 'a0OseoS3rBE',
+    src: '/audio/musica-fondo.mp3',
     title: 'Música de fondo'
   },
   puzzleImage: '/puzzle-board.svg',

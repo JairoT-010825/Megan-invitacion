@@ -1051,21 +1051,8 @@ body.party-mode .count-box {
   height: 30px;
 }
 
-.music-frame {
-  position: fixed;
-  right: 0;
-  bottom: 0;
-  width: 1px;
-  height: 1px;
-  overflow: hidden;
-  opacity: 0.01;
-  pointer-events: none;
-}
-
-.music-frame iframe {
-  width: 1px;
-  height: 1px;
-  border: 0;
+#backgroundMusic {
+  display: none;
 }
 
 body.admin-view {
