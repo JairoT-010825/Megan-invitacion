@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 260" role="img" aria-label="Cubo retro">
+  <defs><filter id="g"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
+  <g filter="url(#g)">
+    <path d="M45 74 132 32l84 45-87 45z" fill="#ffcc17" stroke="#fff" stroke-width="5"/>
+    <path d="M45 74v101l84 52V122z" fill="#ff2dbd" stroke="#fff" stroke-width="5"/>
+    <path d="M129 122v105l87-54V77z" fill="#00eaff" stroke="#fff" stroke-width="5"/>
+    <g stroke="#111" stroke-width="5" opacity=".95">
+      <path d="M74 60v100M104 45v133M162 48v135M190 63v92"/>
+      <path d="M45 105l84 50 87-48M45 140l84 52 87-54M72 90l84-42M101 105l84-42"/>
+    </g>
+    <path d="M73 91 130 62 103 49 45 74z" fill="#ffe93b" opacity=".7"/>
+    <path d="M74 161 103 178V74L74 60z" fill="#ff4fc9" opacity=".7"/>
+    <path d="M158 139 188 120v-58l-30 15z" fill="#721bff" opacity=".7"/>
+  </g>
+</svg>

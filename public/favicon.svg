@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" role="img" aria-label="Megan 80s">
+  <defs>
+    <linearGradient id="g" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#ff2dbd"/><stop offset=".5" stop-color="#00eaff"/><stop offset="1" stop-color="#ffe93b"/></linearGradient>
+    <filter id="glow"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  </defs>
+  <rect width="120" height="120" rx="26" fill="#080015"/>
+  <path d="M18 92 60 14l42 78z" fill="#241059" stroke="#00eaff" stroke-width="5" filter="url(#glow)"/>
+  <text x="60" y="70" text-anchor="middle" font-family="Arial Black, Impact, sans-serif" font-size="37" fill="url(#g)" stroke="#120019" stroke-width="2">M</text>
+  <text x="60" y="94" text-anchor="middle" font-family="Arial Black, Impact, sans-serif" font-size="20" fill="#ffe93b">80s</text>
+</svg>

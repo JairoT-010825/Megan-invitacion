@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <rect width="512" height="512" rx="112" fill="#080015"/>
+  <path d="M74 396 256 58l182 338z" fill="#241059" stroke="#00eaff" stroke-width="22"/>
+  <text x="256" y="300" text-anchor="middle" font-family="Arial Black, Impact, sans-serif" font-size="164" fill="#ff2dbd" stroke="#120019" stroke-width="12">M</text>
+  <text x="256" y="402" text-anchor="middle" font-family="Arial Black, Impact, sans-serif" font-size="84" fill="#ffe93b">80s</text>
+</svg>

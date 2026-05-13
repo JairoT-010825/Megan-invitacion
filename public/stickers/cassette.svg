@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 210" role="img" aria-label="Cassette 80s">
+  <defs><filter id="glow"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
+  <g filter="url(#glow)">
+    <rect x="20" y="33" width="260" height="145" rx="17" fill="#090014" stroke="#ff2dbd" stroke-width="7"/>
+    <rect x="44" y="55" width="212" height="38" rx="8" fill="#f5f7ff"/>
+    <path d="M44 94h212v36H44z" fill="#00eaff"/>
+    <path d="M44 129h212v22H44z" fill="#ffe93b"/>
+    <text x="150" y="82" text-anchor="middle" font-family="Arial Black, Impact, sans-serif" font-size="25" fill="#111">80s MIX</text>
+    <circle cx="99" cy="119" r="32" fill="#111" stroke="#f5f7ff" stroke-width="7"/>
+    <circle cx="201" cy="119" r="32" fill="#111" stroke="#f5f7ff" stroke-width="7"/>
+    <circle cx="99" cy="119" r="10" fill="#f5f7ff"/><circle cx="201" cy="119" r="10" fill="#f5f7ff"/>
+    <rect x="94" y="155" width="112" height="13" rx="6" fill="#ff2dbd"/>
+    <circle cx="67" cy="159" r="5" fill="#00eaff"/><circle cx="233" cy="159" r="5" fill="#00eaff"/>
+  </g>
+</svg>

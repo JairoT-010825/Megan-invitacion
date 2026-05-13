@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 310 160" role="img" aria-label="Lentes retro">
+  <defs><filter id="g"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
+  <g filter="url(#g)">
+    <path d="M31 57h248l-25 74H177l-22-43-22 43H56z" fill="#ff2dbd" stroke="#ff2dbd" stroke-width="12" stroke-linejoin="round"/>
+    <path d="M57 71h77v14H52zM49 96h94v14H43zM42 121h111v14H36zM178 71h77v14h-82zM167 96h94v14h-87zM157 121h111v14H167z" fill="#0a0018"/>
+    <path d="M28 57h254" stroke="#ffe93b" stroke-width="7" stroke-linecap="round"/>
+  </g>
+</svg>

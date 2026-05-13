@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 245" role="img" aria-label="Patin ochentero">
+  <defs><filter id="g"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
+  <g filter="url(#g)">
+    <path d="M94 33h66c32 0 55 28 61 64l13 76H80L52 77c-6-22 12-44 42-44z" fill="#f8f8ff" stroke="#ff2dbd" stroke-width="8"/>
+    <path d="M64 109h163" stroke="#00eaff" stroke-width="11"/>
+    <path d="M90 36v139M124 36v139M160 42v133" stroke="#241059" stroke-width="6"/>
+    <path d="M82 82h118" stroke="#ffe93b" stroke-width="8" stroke-linecap="round"/>
+    <path d="M94 126 132 96l31 31 30-25" fill="none" stroke="#ff2dbd" stroke-width="8" stroke-linecap="round"/>
+    <rect x="64" y="172" width="184" height="23" rx="10" fill="#241059" stroke="#ffe93b" stroke-width="5"/>
+    <circle cx="99" cy="211" r="24" fill="#090014" stroke="#00eaff" stroke-width="8"/><circle cx="214" cy="211" r="24" fill="#090014" stroke="#00eaff" stroke-width="8"/>
+    <circle cx="99" cy="211" r="8" fill="#ffe93b"/><circle cx="214" cy="211" r="8" fill="#ffe93b"/>
+  </g>
+</svg>

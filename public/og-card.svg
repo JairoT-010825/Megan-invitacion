@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#090014"/><stop offset=".5" stop-color="#1d0345"/><stop offset="1" stop-color="#050013"/></linearGradient>
+    <linearGradient id="hot" x1="0" x2="1"><stop stop-color="#ff2dbd"/><stop offset=".5" stop-color="#ffe93b"/><stop offset="1" stop-color="#00eaff"/></linearGradient>
+    <filter id="glow"><feGaussianBlur stdDeviation="8" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <g opacity=".28" stroke="#00eaff"><path d="M0 535h1200M0 575h1200M0 615h1200M120 500v130M260 500v130M400 500v130M540 500v130M680 500v130M820 500v130M960 500v130M1100 500v130"/></g>
+  <path d="M228 470 596 72l368 398z" fill="#2a1065" stroke="#00eaff" stroke-width="8" filter="url(#glow)"/>
+  <text x="600" y="160" text-anchor="middle" font-family="Brush Script MT, Segoe Script, cursive" font-size="80" fill="#fff" stroke="#ff2dbd" stroke-width="2">Fiesta mas 80s</text>
+  <text x="600" y="325" text-anchor="middle" font-family="Arial Black, Impact, sans-serif" font-size="150" fill="#ff2dbd" stroke="#10001f" stroke-width="8" filter="url(#glow)">MEGAN</text>
+  <text x="600" y="430" text-anchor="middle" font-family="Arial Black, Impact, sans-serif" font-size="90" fill="#ffe93b" stroke="#10001f" stroke-width="6">11 ANOS</text>
+  <text x="600" y="535" text-anchor="middle" font-family="Arial Black, Impact, sans-serif" font-size="42" fill="#00eaff">SABADO 16 MAYO - 3:30 PM</text>
+</svg>
