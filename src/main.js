@@ -225,6 +225,10 @@ function renderApp() {
           <div class="neon-divider" aria-hidden="true"></div>
         </footer>
       </main>
+      <button class="music-toggle" type="button" id="musicToggle" aria-label="Activar música de fondo" aria-pressed="false">
+        ${icon.music}
+      </button>
+      <div class="music-frame" id="musicFrame" aria-hidden="true"></div>
       <div class="toast" id="toast" role="status" aria-live="polite"></div>
     </div>
   `;
@@ -306,10 +310,52 @@ function initActions() {
   });
 
   document.querySelector('#adminSecretLink')?.addEventListener('click', openAdminWithPassword);
+  document.querySelector('#musicToggle')?.addEventListener('click', toggleBackgroundMusic);
 
   document.querySelector('#shareBtn')?.addEventListener('click', shareInvitation);
   document.querySelector('#downloadIcsBtn')?.addEventListener('click', downloadCalendarFile);
   document.querySelector('#addCalendarHero')?.addEventListener('click', downloadCalendarFile);
+}
+
+function toggleBackgroundMusic() {
+  const button = document.querySelector('#musicToggle');
+  const frame = document.querySelector('#musicFrame');
+  const videoId = EVENT.backgroundMusic?.youtubeId;
+  if (!button || !frame || !videoId) return;
+
+  const isPlaying = button.getAttribute('aria-pressed') === 'true';
+
+  if (isPlaying) {
+    frame.innerHTML = '';
+    button.classList.remove('is-playing');
+    button.setAttribute('aria-pressed', 'false');
+    button.setAttribute('aria-label', 'Activar música de fondo');
+    showToast('Música pausada.');
+    return;
+  }
+
+  const params = new URLSearchParams({
+    autoplay: '1',
+    loop: '1',
+    playlist: videoId,
+    controls: '0',
+    modestbranding: '1',
+    rel: '0',
+    playsinline: '1'
+  });
+
+  frame.innerHTML = `
+    <iframe
+      title="Música de fondo: ${EVENT.backgroundMusic.title || 'canción 80s'}"
+      src="https://www.youtube.com/embed/${videoId}?${params.toString()}"
+      allow="autoplay; encrypted-media"
+      referrerpolicy="strict-origin-when-cross-origin"
+    ></iframe>
+  `;
+  button.classList.add('is-playing');
+  button.setAttribute('aria-pressed', 'true');
+  button.setAttribute('aria-label', 'Pausar música de fondo');
+  showToast('Música activada.');
 }
 
 function initRsvp() {

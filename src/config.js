@@ -22,6 +22,10 @@ export const EVENT = {
     anonKey: import.meta.env.VITE_SUPABASE_ANON_KEY || '',
     table: import.meta.env.VITE_SUPABASE_TABLE || 'rsvps'
   },
+  backgroundMusic: {
+    youtubeId: 'djV11Xbc914',
+    title: 'Take On Me'
+  },
   puzzleImage: '/puzzle-board.svg',
   stickers: [
     '/stickers/rubik.svg',
