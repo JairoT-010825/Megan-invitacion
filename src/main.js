@@ -34,6 +34,7 @@ function boot() {
   initFloatingStickers();
   initCountdown();
   initActions();
+  initBackgroundMusic();
   initRsvp();
   initPuzzles();
   initScrollReveal();
@@ -111,11 +112,13 @@ function renderApp() {
             <p class="section__eyebrow">Dress code</p>
             <h2 class="card__title">${EVENT.dressCode}</h2>
             <p class="card__copy">La idea es que todos lleguen con energía de video músical retro: colores neon, chamarras, lentes, mezclilla, tenis altos, estampados y peinados divertidos.</p>
-            <ul class="feature-list">
-              <li><span class="feature-icon">${icon.shirt}</span><span>Look 80s obligatorio para niños, adultos y acompañantes</span></li>
-              <li><span class="feature-icon">${icon.music}</span><span>Ambiente de fiesta, música y mini retos.</span></li>
-            </ul>
-          </article>
+            <div class="dress-sign">
+              <span class="dress-sign__top">CÓDIGO DE VESTIMENTA</span>
+              <strong class="dress-sign__main">LOOK 80s OBLIGATORIO</strong>
+              <span class="dress-sign__bottom">Para niños, adultos y acompañantes</span>
+            </div>
+            
+
           
 
         <section class="section" id="ubicación" aria-labelledby="location-title">
@@ -225,10 +228,11 @@ function renderApp() {
           <div class="neon-divider" aria-hidden="true"></div>
         </footer>
       </main>
-      <button class="music-toggle" type="button" id="musicToggle" aria-label="Activar música de fondo" aria-pressed="false">
-        ${icon.music}
+      <button class="music-toggle" type="button" id="musicToggle" aria-label="Reanudar música" aria-pressed="false">
+        <span class="music-toggle__icon">${icon.music}</span>
+        <span class="music-toggle__text">Reanudar música</span>
       </button>
-      <audio id="backgroundMusic" src="${EVENT.backgroundMusic.src}" loop preload="none"></audio>
+      <audio id="backgroundMusic" src="${EVENT.backgroundMusic.src}" loop preload="auto" autoplay playsinline></audio>
       <div class="toast" id="toast" role="status" aria-live="polite"></div>
     </div>
   `;
@@ -317,33 +321,99 @@ function initActions() {
   document.querySelector('#addCalendarHero')?.addEventListener('click', downloadCalendarFile);
 }
 
-function toggleBackgroundMusic() {
+function setMusicButtonState(isPlaying) {
   const button = document.querySelector('#musicToggle');
+  const label = document.querySelector('.music-toggle__text');
+
+  if (!button) return;
+
+  button.classList.toggle('is-playing', isPlaying);
+  button.classList.toggle('needs-interaction', !isPlaying);
+
+  if (label) {
+    label.textContent = isPlaying ? 'Parar música' : 'Reanudar música';
+  }
+
+  button.setAttribute('aria-pressed', String(isPlaying));
+  button.setAttribute(
+    'aria-label',
+    isPlaying ? 'Parar música de fondo' : 'Reanudar música de fondo'
+  );
+}
+
+function toggleBackgroundMusic() {
   const audio = document.querySelector('#backgroundMusic');
-  if (!button || !audio) return;
 
-  const isPlaying = !audio.paused;
+  if (!audio) return;
 
-  if (isPlaying) {
+  if (!audio.paused) {
     audio.pause();
-    button.classList.remove('is-playing');
-    button.setAttribute('aria-pressed', 'false');
-    button.setAttribute('aria-label', 'Activar música de fondo');
+    setMusicButtonState(false);
     showToast('Música pausada.');
     return;
   }
 
   audio.volume = 0.72;
+
   audio.play()
     .then(() => {
-      button.classList.add('is-playing');
-      button.setAttribute('aria-pressed', 'true');
-      button.setAttribute('aria-label', 'Pausar música de fondo');
+      setMusicButtonState(true);
       showToast('Música activada.');
     })
     .catch(() => {
-      showToast('Toca otra vez para activar la música.');
+      setMusicButtonState(false);
+      showToast('Toca la pantalla para activar la música.');
     });
+}
+
+function initBackgroundMusic() {
+  const audio = document.querySelector('#backgroundMusic');
+
+  if (!audio) return;
+
+  audio.volume = 0.72;
+  audio.load();
+
+  let interactionHandled = false;
+
+  const tryPlayMusic = (showMessage = false) => {
+    audio.play()
+      .then(() => {
+        setMusicButtonState(true);
+
+        if (showMessage) {
+          showToast('Música activada.');
+        }
+      })
+      .catch(() => {
+        setMusicButtonState(false);
+      });
+  };
+
+  const unlockOnFirstInteraction = (event) => {
+    if (interactionHandled) return;
+
+    const clickedMusicButton = event.target.closest?.('#musicToggle');
+
+    if (clickedMusicButton) {
+      return;
+    }
+
+    interactionHandled = true;
+    tryPlayMusic(true);
+
+    window.removeEventListener('pointerdown', unlockOnFirstInteraction);
+    window.removeEventListener('touchstart', unlockOnFirstInteraction);
+    window.removeEventListener('keydown', unlockOnFirstInteraction);
+  };
+
+  setTimeout(() => {
+    tryPlayMusic(false);
+  }, 500);
+
+  window.addEventListener('pointerdown', unlockOnFirstInteraction, { passive: true });
+  window.addEventListener('touchstart', unlockOnFirstInteraction, { passive: true });
+  window.addEventListener('keydown', unlockOnFirstInteraction);
 }
 
 function initRsvp() {
