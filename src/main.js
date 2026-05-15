@@ -694,6 +694,7 @@ async function renderAdminDashboard() {
       </section>
 
       <section class="admin-table-section">
+        <h2 class="admin-section-title">Confirmaciones</h2>
         <label class="admin-search">
           <span class="sr-only">Buscar invitado</span>
           <input id="adminSearchInput" placeholder="Buscar invitado..." />
@@ -717,6 +718,40 @@ async function renderAdminDashboard() {
         </div>
         <p class="admin-muted" id="adminDataStatus"></p>
       </section>
+
+      <section class="admin-table-section">
+        <h2 class="admin-section-title">Canciones sugeridas</h2>
+        <div class="admin-table-wrap">
+          <table class="admin-table admin-table--songs">
+            <thead>
+              <tr>
+                <th>Invitado</th>
+                <th>Canción</th>
+              </tr>
+            </thead>
+            <tbody id="adminSongsTableBody">
+              <tr><td colspan="2">Cargando canciones...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="admin-table-section">
+        <h2 class="admin-section-title">Mensajes para Megan</h2>
+        <div class="admin-table-wrap">
+          <table class="admin-table admin-table--messages">
+            <thead>
+              <tr>
+                <th>Invitado</th>
+                <th>Mensaje especial</th>
+              </tr>
+            </thead>
+            <tbody id="adminMessagesTableBody">
+              <tr><td colspan="2">Cargando mensajes...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
     </main>
   `;
 
@@ -730,6 +765,8 @@ async function renderAdminDashboard() {
     renderAdminData(rows);
   } catch {
     document.querySelector('#adminTableBody').innerHTML = '<tr><td colspan="5">No se pudieron cargar las confirmaciones.</td></tr>';
+    document.querySelector('#adminSongsTableBody').innerHTML = '<tr><td colspan="2">No se pudieron cargar las canciones.</td></tr>';
+    document.querySelector('#adminMessagesTableBody').innerHTML = '<tr><td colspan="2">No se pudieron cargar los mensajes.</td></tr>';
     document.querySelector('#adminDataStatus').textContent = 'Revisa la configuración de Supabase en .env.local.';
   }
 }
@@ -750,9 +787,16 @@ function renderAdminData(rows) {
 
   const paint = () => {
     const query = String(search?.value || '').trim().toLowerCase();
-    const filtered = rows.filter((row) => row.name.toLowerCase().includes(query) || row.phone.includes(query));
+    const filtered = rows.filter((row) => [
+      row.name,
+      row.phone,
+      row.song,
+      row.message
+    ].some((value) => value.toLowerCase().includes(query)));
     renderAdminStats(filtered);
     renderAdminRows(filtered);
+    renderAdminSongs(filtered);
+    renderAdminMessages(filtered);
     if (status) status.textContent = hasSupabaseConfig() ? `${filtered.length} registros desde Supabase.` : `${filtered.length} registros locales de prueba.`;
   };
 
@@ -797,13 +841,51 @@ function renderAdminRows(rows) {
   `).join('');
 }
 
+function renderAdminSongs(rows) {
+  const body = document.querySelector('#adminSongsTableBody');
+  if (!body) return;
+
+  const songs = rows.filter((row) => row.song);
+  if (!songs.length) {
+    body.innerHTML = '<tr><td colspan="2">Aún no hay canciones sugeridas.</td></tr>';
+    return;
+  }
+
+  body.innerHTML = songs.map((row) => `
+    <tr>
+      <td>${escapeHtml(row.name)}</td>
+      <td>${escapeHtml(row.song)}</td>
+    </tr>
+  `).join('');
+}
+
+function renderAdminMessages(rows) {
+  const body = document.querySelector('#adminMessagesTableBody');
+  if (!body) return;
+
+  const messages = rows.filter((row) => row.message);
+  if (!messages.length) {
+    body.innerHTML = '<tr><td colspan="2">Aún no hay mensajes especiales para Megan.</td></tr>';
+    return;
+  }
+
+  body.innerHTML = messages.map((row) => `
+    <tr>
+      <td>${escapeHtml(row.name)}</td>
+      <td>${escapeHtml(row.message)}</td>
+    </tr>
+  `).join('');
+}
+
 function normalizeAdminRow(row) {
   return {
     name: String(row.guest_name || row.guestName || row.name || 'Sin nombre'),
     attendance: row.attendance === 'no' ? 'no' : 'si',
     adults: clampNumber(row.adults, 0, 999),
     kids: clampNumber(row.kids ?? row.children, 0, 999),
-    phone: String(row.phone || row.telefono || row.whatsapp || '')
+    phone: String(row.phone || row.telefono || row.whatsapp || ''),
+    song: String(row.song || row.cancion || ''),
+    message: String(row.message || row.mensaje || '')
   };
 }
 

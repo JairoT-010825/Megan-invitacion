@@ -1132,6 +1132,7 @@ body.admin-view {
 .admin-kicker,
 .admin-login-title,
 .admin-hero h1,
+.admin-section-title,
 .admin-stat-card span,
 .admin-stat-card strong,
 .admin-table th {
@@ -1225,6 +1226,18 @@ body.admin-view {
   z-index: 1;
 }
 
+.admin-table-section + .admin-table-section {
+  margin-top: clamp(28px, 5vw, 58px);
+}
+
+.admin-section-title {
+  margin: 0 0 16px;
+  color: var(--green);
+  font-size: clamp(1.9rem, 4vw, 3.3rem);
+  line-height: 0.9;
+  text-shadow: 0 0 16px rgba(68, 255, 105, 0.75);
+}
+
 .admin-search {
   width: min(100%, 430px);
   margin-left: auto;
@@ -1270,10 +1283,19 @@ body.admin-view {
   border-collapse: collapse;
 }
 
+.admin-table--messages {
+  min-width: 820px;
+}
+
+.admin-table--songs {
+  min-width: 640px;
+}
+
 .admin-table th,
 .admin-table td {
   padding: 20px 22px;
   border: 3px solid var(--cyan);
+  overflow-wrap: anywhere;
 }
 
 .admin-table th {
@@ -1433,6 +1455,12 @@ body.admin-view {
     height: 24px;
   }
 
+  .admin-section-title {
+    margin-bottom: 12px;
+    font-size: clamp(1.55rem, 8vw, 2.35rem);
+    line-height: 0.92;
+  }
+
   .admin-table-wrap {
     border-width: 2px;
     border-radius: 12px;
@@ -1442,20 +1470,40 @@ body.admin-view {
     min-width: 560px;
   }
 
+  .admin-table--messages {
+    min-width: 100%;
+    table-layout: fixed;
+  }
+
+  .admin-table--songs {
+    min-width: 100%;
+    table-layout: fixed;
+  }
+
+  .admin-table--songs th:first-child,
+  .admin-table--songs td:first-child {
+    width: 42%;
+  }
+
+  .admin-table--messages th:first-child,
+  .admin-table--messages td:first-child {
+    width: 34%;
+  }
+
   .admin-table th,
   .admin-table td {
-    padding: 10px 9px;
+    padding: 8px 7px;
     border-width: 2px;
   }
 
   .admin-table th {
-    font-size: 0.86rem;
+    font-size: 0.78rem;
     line-height: 1;
   }
 
   .admin-table td {
-    font-size: 0.9rem;
-    line-height: 1.18;
+    font-size: 0.82rem;
+    line-height: 1.12;
   }
 
   .admin-muted {
@@ -1524,7 +1572,7 @@ body.admin-view {
 
 @media (max-width: 430px) {
   .admin-shell {
-    padding-inline: 8px;
+    padding-inline: 6px;
   }
 
   .admin-stat-card {
@@ -1540,17 +1588,31 @@ body.admin-view {
     min-width: 500px;
   }
 
+  .admin-table--messages {
+    min-width: 100%;
+  }
+
+  .admin-table--songs {
+    min-width: 100%;
+  }
+
+  .admin-table--songs th:first-child,
+  .admin-table--songs td:first-child {
+    width: 38%;
+  }
+
   .admin-table th,
   .admin-table td {
-    padding: 9px 7px;
+    padding: 7px 6px;
   }
 
   .admin-table th {
-    font-size: 0.78rem;
+    font-size: 0.68rem;
   }
 
   .admin-table td {
-    font-size: 0.82rem;
+    font-size: 0.74rem;
+    line-height: 1.08;
   }
 
   .hero {
